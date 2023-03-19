@@ -6,6 +6,7 @@ function clampBrightness(brightness: number) {
 }
 
 async function setBrightnessToMonitor(brightness: number) {
+    console.log('start syncing');
     const {stdout: current} = await $`/usr/local/bin/m1ddc get luminance`
     if (isNumeric(current) && Math.abs(Number(current) - brightness) < 10) {
         console.log(`current monitor brightness: ${current}, ambient brightness: ${brightness}. no need to update brightness`);
