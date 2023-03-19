@@ -19,5 +19,4 @@ export default async () => {
     let brightness = await readBrightness();
     brightness = clampBrightness(brightness)
     await setBrightnessToMonitor(brightness)
-    console.log("brightness = " + JSON.stringify(brightness, null, 2));
 }
