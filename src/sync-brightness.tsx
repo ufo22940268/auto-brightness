@@ -15,11 +15,11 @@ async function setBrightnessToMonitor(brightness: number) {
     }
     console.log('update brightness');
     await $`/usr/local/bin/m1ddc set luminance ${brightness}`
+    await showHUD(`adjust brightness ${current} to ${brightness}`)
 }
 
 export default async () => {
     let brightness = await readBrightness();
     brightness = clampBrightness(brightness)
     await setBrightnessToMonitor(brightness)
-    await showHUD(`set brightness to ${brightness}`)
 }
