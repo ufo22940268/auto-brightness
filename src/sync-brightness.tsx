@@ -1,5 +1,6 @@
 import { isNumeric, readBrightness } from "./sensor";
 import { $ } from "execa";
+import { showHUD, showToast } from "@raycast/api";
 
 function clampBrightness(brightness: number) {
     return Math.floor(Math.min(brightness, 60)/60*100)
@@ -20,4 +21,5 @@ export default async () => {
     let brightness = await readBrightness();
     brightness = clampBrightness(brightness)
     await setBrightnessToMonitor(brightness)
+    await showHUD(`set brightness to ${brightness}`)
 }

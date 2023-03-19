@@ -12,10 +12,10 @@
   "commands": [
     {
       "name": "sync-brightness",
-      "title": "sync-brightness",
+      "title": "Sync brightness",
       "description": "adjust monitor brightness",
       "mode": "no-view",
-      "interval": "1m"
+      "interval": "10s"
     }
   ],
   "dependencies": {
