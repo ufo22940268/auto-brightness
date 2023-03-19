@@ -13,6 +13,12 @@ async function setBrightnessToMonitor(brightness: number) {
         console.log(`current monitor brightness: ${current}, ambient brightness: ${brightness}. no need to update brightness`);
         return;
     }
+
+    if (Number(current) < 0) {
+        console.log("failed to get current brightness of monitor: ", + current);
+        return;
+    }
+
     console.log('update brightness');
     await $`/usr/local/bin/m1ddc set luminance ${brightness}`
     await showHUD(`adjust brightness ${current} to ${brightness}`)
