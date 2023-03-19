@@ -1,6 +1,6 @@
 # auto-brightness
 
-Automatically adjusting the brightness of your monitor based on the ambient lighting in your environment can greatly improve your viewing experience. This feature ensures that your eyes are not strained by overly bright or dim screens in different lighting conditions, while also reducing energy consumption. With automatic brightness adjustment, you no longer need to manually adjust your screen brightness every time you move to a different location.
+Automatically adjusting the brightness of your monitor based on the ambient lighting in your environment can greatly improve your viewing experience. This feature ensures that your eyes are not strained by overly bright or dim screens in different lighting conditions, while also reducing energy consumption. With automatic brightness adjustment, you no longer need to manually adjust your screen brightness every time the environment light is changed.
 
 # Demo
 
