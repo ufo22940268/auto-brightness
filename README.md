@@ -5,7 +5,7 @@ Automatically adjust monitor brightness according the ambient light around.
 
 # Demo
 
-![](assets/IMG_3740.mov)
+https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 
 # The materials you needs
 
