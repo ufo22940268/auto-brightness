@@ -26,4 +26,4 @@ https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 It uses the raycast to run the sync job periodically to sync the brightness from pico into mac and then mac adjust the monitor brightness.
 So you have to install the raycast on you mac, and install this extension.
 
-After all this down, the sync background job should be started automatically as soon as raycast is launched.
+After all this done, the sync background job should be started automatically as soon as raycast is launched.
