@@ -18,6 +18,17 @@
       "interval": "10s"
     }
   ],
+  "preferences": [
+    {
+      "default": "100",
+      "title": "Max brightness",
+      "description": "The max brightness as for the light sensor. Raise it up when you feel the monitor is too bright. Turn it down otherwise.",
+      "placeholder": "270",
+      "type": "textfield",
+      "name": "maxBrightness",
+      "required": false
+    }
+  ],
   "dependencies": {
     "@raycast/api": "^1.48.9",
     "execa": "^7.1.1"
