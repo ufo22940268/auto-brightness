@@ -1,6 +1,6 @@
 import { isNumeric, readBrightness } from "./sensor";
 import { $ } from "execa";
-import { Cache, getPreferenceValues, launchCommand, LaunchType, showHUD } from "@raycast/api";
+import { Cache, closeMainWindow, getPreferenceValues, launchCommand, LaunchType, showHUD } from "@raycast/api";
 
 function clampBrightness(brightness: number) {
     const maxBrightness = getPreferenceValues()["maxBrightness"]
@@ -37,4 +37,5 @@ export default async () => {
     const newBrightness = await setBrightnessToMonitor(brightness)
     if (newBrightness != undefined) new Cache().set("brightness", newBrightness.toString());
     await launchCommand({ name: "brightnessDiameter", type: LaunchType.Background });
+    await closeMainWindow();
 }
