@@ -44,4 +44,4 @@ def update_led():
 
 while True:
     update_led()
-    time.sleep(0.1)
+    time.sleep(1)

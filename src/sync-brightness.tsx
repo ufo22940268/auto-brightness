@@ -37,5 +37,4 @@ export default async () => {
     const newBrightness = await setBrightnessToMonitor(brightness)
     if (newBrightness != undefined) new Cache().set("brightness", newBrightness.toString());
     await launchCommand({ name: "brightnessDiameter", type: LaunchType.Background });
-    await closeMainWindow();
 }

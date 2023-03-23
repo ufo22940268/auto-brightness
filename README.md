@@ -16,8 +16,8 @@ https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 # Building the Project
 
 1. Connect the GND and VCC ports of the light sensor to the Pico.
-2. Connect the SCL to GP14.
-3. Connect the SDA to GP15.
+2. Connect the SDA to GP14.
+3. Connect the SCL to GP15.
 4. Flash the pico/main.py code onto the Pico.
 
 # Installing the Raycast Extension
