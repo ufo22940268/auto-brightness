@@ -8,6 +8,7 @@ https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 
 # Required Materials
 
+
 1. Raspberry Pi Pico
 2. BH1750FVI ambient light sensor
 3. Wires for connecting the Pico and light sensor
