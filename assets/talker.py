@@ -8,6 +8,10 @@ class Talker:
         self.serial = serial.Serial('/dev/cu.usbmodem21401', 9600, timeout=timeout)
 
     def send(self, text: str):
+        """
+
+        :rtype: object
+        """
         line = '%s\r\f' % text
         self.serial.write(line.encode('utf-8'))
         reply = self.receive()
