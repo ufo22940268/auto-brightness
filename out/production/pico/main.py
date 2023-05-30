@@ -13,10 +13,6 @@ def show(vol):
     draw_volume(display, vol)
 
 
-# show("Hello")
-
-# draw_volume(display, 30)
-
 # Simple driver for the BH1750FVI digital light sensor
 MEASUREMENT_TIME = 120
 

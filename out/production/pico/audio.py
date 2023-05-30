@@ -48,12 +48,47 @@ def get_icon(vol):
         return icon_data['mute']
 
 
-def draw_volume(display, vol):
-    display.fill(0)
+buf = bytearray(128 * 64 // 8)  # Size of the framebuffer (128*64 pixels monochrome)
+fb = framebuf.FrameBuffer(buf, 128, 64, framebuf.MONO_HLSB)
 
-    icon = get_icon(vol)
-    fb = framebuf.FrameBuffer(icon, icon_width, icon_height, framebuf.MONO_HLSB)
-    x = 45
-    y = 10
-    display.blit(fb, x, y)
+
+def draw_volume_bar(display, volume):
+    # Clear the FrameBuffer
+    fb.fill(0)
+
+    # Define parameters for the bar
+    bar_width = 100
+    bar_height = 10
+    bar_x = (128 - bar_width) // 2  # Center the bar horizontally
+    bar_y = (64 - bar_height) // 2  # Center the bar vertically
+    nob_width = 4
+    nob_height = bar_height + 6
+
+    # Draw the left part of the bar
+    left_width = int(bar_width * volume)
+    fb.fill_rect(bar_x, bar_y, left_width, bar_height, 1)
+
+    # Draw the right part of the bar
+    fb.rect(bar_x + left_width, bar_y, bar_width - left_width, bar_height, 1)
+
+    # Draw the nob
+    nob_x = bar_x + left_width - nob_width // 2
+    nob_y = bar_y - (nob_height - bar_height) // 2
+    fb.fill_rect(nob_x, nob_y, nob_width, nob_height, 1)
+
+    # Update the display
+    display.blit(fb, 0, 0)
     display.show()
+
+
+def draw_volume(display, vol):
+    if vol == 0:
+        display.fill(0)
+        icon = get_icon(vol)
+        fb = framebuf.FrameBuffer(icon, icon_width, icon_height, framebuf.MONO_HLSB)
+        x = 45
+        y = 10
+        display.blit(fb, x, y)
+        display.show()
+    else:
+        draw_volume_bar(display, vol / 100)
