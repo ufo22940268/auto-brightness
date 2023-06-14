@@ -17,6 +17,12 @@ def update_text(text):
     t.close()
 
 
+def turn_off_display(turn_off):
+    t = Talker()
+    t.send("turn_off_display(" + turn_off + ")")
+    t.close()
+
+
 def main():
     if len(sys.argv) < 2:
         print("Please provide an argument (get_brightness or update_text)")
@@ -29,6 +35,8 @@ def main():
             print("Please provide text to be updated")
             sys.exit(1)
         update_text(sys.argv[2])
+    elif sys.argv[1] == 'turn_off_display':
+        turn_off_display(sys.argv[2])
     else:
         print("Invalid argument. Please provide either 'get_brightness' or 'update_text'")
         sys.exit(1)

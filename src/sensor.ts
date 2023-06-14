@@ -1,25 +1,8 @@
 import { $, execa } from "execa";
 import path from "path";
-import { environment } from "@raycast/api";
-import * as fs from "fs";
 
-const binaryAsset = path.join(environment.assetsPath, "cli.py");
-const binary = path.join(environment.supportPath, "cli.py");
-
-const talkerAsset = path.join(environment.assetsPath, "talker.py");
-const talker = path.join(environment.supportPath, "talker.py");
-
-async function ensureBinary() {
-    if (!fs.existsSync(binary)) {
-        await execa("cp", [binaryAsset, binary]);
-        await execa("chmod", ["+x", binary]);
-    }
-
-    if (!fs.existsSync(talker)) {
-        await execa("cp", [talkerAsset, talker]);
-        await execa("chmod", ["+x", talker]);
-    }
-}
+const assetsPath = '/Users/chao.cheng/code/extensions/auto-brightness/assets'
+const binary = path.join(assetsPath, "cli.py");
 
 export function isNumeric(str: string) {
     if (typeof str != "string") return false // we only process strings!
@@ -30,12 +13,19 @@ export function isNumeric(str: string) {
 }
 
 export const readBrightness = async (): Promise<number> => {
-    await ensureBinary();
     const {stdout} = await execa("python3", [binary, 'get_brightness']);
     if (!isNumeric(stdout)) {
         throw new Error("error get brightness: " + stdout);
     }
     return Number(stdout)
+}
+
+export const turnOffDisplay = async (): Promise<void> => {
+    await execa("python3", [binary, 'turn_off_display', 'True']);
+}
+
+export const turnOnDisplay = async (): Promise<void> => {
+    await execa("python3", [binary, 'turn_off_display', 'False']);
 }
 
 export const m1ddc = async (command: string[]): Promise<string> => {
