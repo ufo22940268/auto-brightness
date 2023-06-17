@@ -18,11 +18,23 @@
       "interval": "10s"
     },
     {
-      "name": "turnOffDisplay",
-      "title": "Turn off display",
+      "name": "scheduleDisplay",
+      "title": "Turn off display during night",
       "description": "Turn off display during night",
       "mode": "no-view",
-      "interval": "10s"
+      "interval": "60s"
+    },
+    {
+      "name": "turnOffDisplay",
+      "title": "Turn off mini lcd display",
+      "description": "Turn off display during night",
+      "mode": "no-view"
+    },
+    {
+      "name": "turnOnDisplay",
+      "title": "Turn on mini lcd display",
+      "description": "Turn on display during night",
+      "mode": "no-view"
     },
     {
       "name": "brightnessDiameter",
