@@ -1,7 +1,8 @@
-import { changeDisplayInOneDay, turnOffDisplay } from "./sensor";
+import { turnOffDisplay } from "./sensor";
+
+import { storeChange } from "./temporaryChangeDisplay";
 
 export default async () => {
-  changeDisplayInOneDay.date = new Date()
-  changeDisplayInOneDay.off = true;
+  storeChange(true);
   await turnOffDisplay();
 }
