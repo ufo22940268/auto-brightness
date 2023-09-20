@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/auto-brightness.iml" filepath="$PROJECT_DIR$/.idea/auto-brightness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pico/pico.iml" filepath="$PROJECT_DIR$/pico/pico.iml" />
     </modules>
   </component>
 </project>
