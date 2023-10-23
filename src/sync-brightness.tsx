@@ -1,6 +1,6 @@
 import { isNumeric, readBrightness } from "./sensor";
 import { $ } from "execa";
-import { Cache, getPreferenceValues, launchCommand, LaunchType, showHUD, showToast } from "@raycast/api";
+import { Cache, getPreferenceValues, launchCommand, LaunchType, showHUD } from "@raycast/api";
 
 function clampBrightness(brightness: number) {
     const maxBrightness = getPreferenceValues()["maxBrightness"]
@@ -18,14 +18,16 @@ async function setBrightnessToMonitor(brightness: number) {
     }
 
     if (Number(current) < 0) {
-        console.log("failed to get current brightness of monitor: ", + current);
+        console.log("failed to get current brightness of monitor: ", +current);
         return;
     }
 
-    console.log('update brightness');
-    await $`/usr/local/bin/m1ddc set luminance ${brightness}`
-    await showHUD(`adjust brightness ${current} to ${brightness}`)
-    return brightness
+    console.log("update brightness");
+    await $`/usr/local/bin/m1ddc set luminance ${brightness}`;
+    if (getPreferenceValues()["promptBrightnessChange"]) {
+        await showHUD(`adjust brightness ${current} to ${brightness}`);
+    }
+    return brightness;
 }
 
 export default async () => {
