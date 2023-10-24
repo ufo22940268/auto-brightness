@@ -7,12 +7,16 @@ function clampBrightness(brightness: number) {
     if (!isNumeric(maxBrightness)) {
         throw new Error(`max brightness ${maxBrightness} should be a number`);
     }
-    return Math.floor(Math.min(brightness, maxBrightness)/maxBrightness*100);
+    let v =  Math.floor(Math.min(brightness, maxBrightness)/maxBrightness*100);
+    if (v < 15 && brightness < 25) {
+        v = brightness;
+    }
+    return v;
 }
 
 async function setBrightnessToMonitor(brightness: number) {
     const {stdout: current} = await $`/usr/local/bin/m1ddc get luminance`
-    if (isNumeric(current) && Math.abs(Number(current) - brightness) < 10) {
+    if (isNumeric(current) && Math.abs(Number(current) - brightness) < 5) {
         console.log(`current monitor brightness: ${current}, ambient brightness: ${brightness}. no need to update brightness`);
         return;
     }
