@@ -5,10 +5,19 @@ import * as fs from "fs";
 
 const binaryAsset = path.join(environment.assetsPath, "read_brightness.py");
 const binary = path.join(environment.supportPath, "read_brightness.py");
+
+const talkerAsset = path.join(environment.assetsPath, "talker.py");
+const talker = path.join(environment.supportPath, "talker.py");
+
 async function ensureBinary() {
     if (!fs.existsSync(binary)) {
         await execa("cp", [binaryAsset, binary]);
         await execa("chmod", ["+x", binary]);
+    }
+
+    if (!fs.existsSync(talker)) {
+        await execa("cp", [talkerAsset, talker]);
+        await execa("chmod", ["+x", talker]);
     }
 }
 
