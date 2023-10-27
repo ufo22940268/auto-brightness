@@ -37,3 +37,19 @@ export const readBrightness = async (): Promise<number> => {
     }
     return Number(stdout)
 }
+
+export const updateText = async (text: string) => {
+    await ensureBinary();
+
+    await execa("python3", [binary, 'update_text', text]);
+}
+
+
+export const m1ddc = async (command: string[]): Promise<string> => {
+    const { stdout, stderr } = await execa("/usr/local/bin/m1ddc", command);
+    if (stderr) {
+        throw new Error("error m1ddc: " + stderr);
+    }
+
+    return stdout;
+}
