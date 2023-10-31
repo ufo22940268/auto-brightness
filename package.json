@@ -18,6 +18,13 @@
       "interval": "10s"
     },
     {
+      "name": "turnOffDisplay",
+      "title": "Turn off display",
+      "description": "Turn off display during night",
+      "mode": "no-view",
+      "interval": "10s"
+    },
+    {
       "name": "brightnessDiameter",
       "title": "Birightness diameter",
       "description": "",

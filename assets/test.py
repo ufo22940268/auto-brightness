@@ -2,7 +2,7 @@
 import serial
 import time
 
-ser = serial.Serial('/dev/tty.usbmodem21401', 9600, timeout=1)  # 打开串口
+ser = serial.Serial('/dev/tty.usbmodem1401', 9600, timeout=1)  # 打开串口
 ser.flushInput()
 while True:
     data = ser.readline()
