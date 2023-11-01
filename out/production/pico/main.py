@@ -18,7 +18,8 @@ def show(vol):
 def turn_off_display(turn_off):
     global display_enabled
     display_enabled = not turn_off
-    draw_blank(display)
+    if turn_off:
+        draw_blank(display)
 
 
 # Simple driver for the BH1750FVI digital light sensor
