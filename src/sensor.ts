@@ -18,6 +18,7 @@ export const readBrightness = async (): Promise<number> => {
     if (!isNumeric(stdout)) {
         throw new Error("error get brightness: " + stdout);
     }
+    console.log("brightness from sensor: " + stdout);
     return Number(stdout)
 }
 

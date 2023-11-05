@@ -2,6 +2,7 @@ import { isNumeric, readBrightness } from "./sensor";
 import { $ } from "execa";
 import { Cache, getPreferenceValues, launchCommand, LaunchType, showHUD } from "@raycast/api";
 
+const cache = new Cache();
 function clampBrightness(brightness: number) {
     const maxBrightness = getPreferenceValues()["maxBrightness"]
     if (!isNumeric(maxBrightness)) {
@@ -15,18 +16,20 @@ function clampBrightness(brightness: number) {
 }
 
 async function setBrightnessToMonitor(brightness: number) {
-    const {stdout: current} = await $`/usr/local/bin/m1ddc get luminance`
-    if (isNumeric(current) && Math.abs(Number(current) - brightness) < 10) {
-        console.log(`current monitor brightness: ${current}, ambient brightness: ${brightness}. no need to update brightness`);
-        return;
+    const current = cache.get("brightness");
+    if (current != undefined && isNumeric(current)) {
+        if (isNumeric(current) && Math.abs(Number(current) - brightness) < 10) {
+            console.log(`current monitor brightness: ${current}, ambient brightness: ${brightness}. no need to update brightness`);
+            return;
+        }
+
+        if (Number(current) < 0) {
+            console.log("failed to get current brightness of monitor: ", +current);
+            return;
+        }
     }
 
-    if (Number(current) < 0) {
-        console.log("failed to get current brightness of monitor: ", +current);
-        return;
-    }
-
-    console.log("update brightness");
+    console.log("update current brightness " + current + "  to " + brightness);
     await $`/usr/local/bin/m1ddc set luminance ${brightness}`;
     if (getPreferenceValues()["promptBrightnessChange"]) {
         await showHUD(`adjust brightness ${current} to ${brightness}`);
@@ -37,8 +40,10 @@ async function setBrightnessToMonitor(brightness: number) {
 export default async () => {
     let brightness = await readBrightness();
     console.log("start syncing, sensor brightness: " + JSON.stringify(brightness, null, 2));
-    brightness = clampBrightness(brightness)
-    const newBrightness = await setBrightnessToMonitor(brightness)
-    if (newBrightness != undefined) new Cache().set("brightness", newBrightness.toString());
+    brightness = clampBrightness(brightness);
+    const newBrightness = await setBrightnessToMonitor(brightness);
+    if (newBrightness != undefined) {
+        cache.set("brightness", newBrightness.toString());
+    }
     await launchCommand({ name: "brightnessDiameter", type: LaunchType.Background });
 }
