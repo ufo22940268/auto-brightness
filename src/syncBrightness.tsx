@@ -9,9 +9,9 @@ function clampBrightness(brightness: number) {
         throw new Error(`max brightness ${maxBrightness} should be a number`);
     }
     let v =  Math.floor(Math.min(brightness, maxBrightness)/maxBrightness*100);
-    // if (v < 15 && brightness < 25) {
-    //     v = brightness;
-    // }
+    if (v < 15 && brightness < 25) {
+        v = brightness;
+    }
     return v;
 }
 
