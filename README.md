@@ -21,9 +21,10 @@ https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 3. Connect the SCL to GP15.
 4. Flash the pico/main.py code onto the Pico.
 
-# Installing the Raycast Extension
+## Acknowledgements
 
-To run the sync job periodically and adjust the monitor brightness, you need to install the Raycast extension on your Mac. Once installed, you can then install this specific extension. Once both are installed, the sync background job should automatically start running as soon as you launch Raycast.
+- [Intellij IDEA](https://www.jetbrains.com/)
 
-1. pip3 install pyserial
-2. copy the [m1ddc](https://github.com/waydabber/m1ddc) binary into `/usr/local/bin`.
+
+# License
+The source code for the site is licensed under the MIT license, which you can find in the MIT-LICENSE.txt file.
