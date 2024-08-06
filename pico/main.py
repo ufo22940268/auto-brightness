@@ -36,9 +36,10 @@ pwm.freq(1000)
 
 
 def update_led():
-    l = int(min(max(0, int(dev.read())), 200)/200*100)
-    print(l)
+    brightness = int(dev.read())
+    l = int(min(max(0, brightness), 200) / 200 * 100)
     pwm.duty_u16(int(2 ** 16 * (l / float(200))))
+    print(brightness)
 
 
 while True:
