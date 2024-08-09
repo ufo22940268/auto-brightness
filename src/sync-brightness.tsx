@@ -7,7 +7,7 @@ function clampBrightness(brightness: number) {
     if (!isNumeric(maxBrightness)) {
         throw new Error(`max brightness ${maxBrightness} should be a number`);
     }
-    return Math.floor(Math.min(brightness, maxBrightness)/maxBrightness*100)
+    return Math.floor(Math.min(brightness, maxBrightness)/maxBrightness*100);
 }
 
 async function setBrightnessToMonitor(brightness: number) {
