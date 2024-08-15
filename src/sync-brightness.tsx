@@ -1,6 +1,6 @@
 import { isNumeric, readBrightness } from "./sensor";
 import { $ } from "execa";
-import { getPreferenceValues, showHUD, showToast } from "@raycast/api";
+import { Cache, getPreferenceValues, launchCommand, LaunchType, showHUD, showToast } from "@raycast/api";
 
 function clampBrightness(brightness: number) {
     const maxBrightness = getPreferenceValues()["maxBrightness"]
@@ -25,11 +25,14 @@ async function setBrightnessToMonitor(brightness: number) {
     console.log('update brightness');
     await $`/usr/local/bin/m1ddc set luminance ${brightness}`
     await showHUD(`adjust brightness ${current} to ${brightness}`)
+    return brightness
 }
 
 export default async () => {
     let brightness = await readBrightness();
     console.log("start syncing, sensor brightness: " + JSON.stringify(brightness, null, 2));
     brightness = clampBrightness(brightness)
-    await setBrightnessToMonitor(brightness)
+    const newBrightness = await setBrightnessToMonitor(brightness)
+    if (newBrightness != undefined) new Cache().set("brightness", newBrightness.toString());
+    await launchCommand({ name: "brightnessDiameter", type: LaunchType.Background });
 }

@@ -16,6 +16,12 @@
       "description": "adjust monitor brightness",
       "mode": "no-view",
       "interval": "10s"
+    },
+    {
+      "name": "brightnessDiameter",
+      "title": "Birightness diameter",
+      "description": "",
+      "mode": "menu-bar"
     }
   ],
   "preferences": [
