@@ -33,6 +33,14 @@
       "type": "textfield",
       "name": "maxBrightness",
       "required": false
+    },
+    {
+      "name": "promptBrightnessChange",
+      "default": true,
+      "type": "checkbox",
+      "label": "Prompt brightness change",
+      "description": "Whether show a toast when brightness changes",
+      "required": false
     }
   ],
   "dependencies": {

@@ -22,7 +22,7 @@ export function isNumeric(str: string) {
 
 export const readBrightness = async (): Promise<number> => {
     await ensureBinary();
-    const {stdout} = await execa("/Users/chao.cheng/.pyenv/shims/python3", [binary]);
+    const {stdout} = await execa("python3", [binary]);
     if (!isNumeric(stdout)) {
         throw new Error("error get brightness: " + stdout);
     }
