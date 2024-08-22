@@ -23,3 +23,6 @@ https://youtube.com/shorts/Lfg8SN3TY0M?feature=share
 # Installing the Raycast Extension
 
 To run the sync job periodically and adjust the monitor brightness, you need to install the Raycast extension on your Mac. Once installed, you can then install this specific extension. Once both are installed, the sync background job should automatically start running as soon as you launch Raycast.
+
+1. pip3 install pyserial
+2. copy the [m1ddc](https://github.com/waydabber/m1ddc) binary into `/usr/local/bin`.
