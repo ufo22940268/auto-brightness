@@ -1,47 +1,38 @@
-import time
+import utime
+from machine import Pin, I2C, UART
+import ssd1306
 
-from machine import Pin, I2C, PWM
+# 创建一个I2C接口
+i2c = I2C(1, sda=Pin(2), scl=Pin(3))
 
-i2c_2 = I2C(1, sda=Pin(14), scl=Pin(15), freq=400000)
-
-# Simple driver for the BH1750FVI digital light sensor
-
-MEASUREMENT_TIME = 120
-
-
-class BH1750FVI:
-    def __init__(self, i2c, addr=0x23, period=150):
-        self.i2c = i2c
-        self.period = period
-        self.addr = addr
-        self.time = 0
-        self.value = 0
-        self.i2c.writeto(addr, bytes([0x10]))  # start continuos 1 Lux readings every 120ms
-
-    def read(self):
-        self.time += self.period
-        if self.time >= MEASUREMENT_TIME:
-            self.time = 0
-            data = self.i2c.readfrom(self.addr, 2)
-            self.value = (((data[0] << 8) + data[1]) * 1200) // 1000
-        return self.value
+# 创建一个SSD1315对象
+# 注意，SSD1315的分辨率可能因模块不同而不同，以下例子中的128, 64是示例值
+# 请根据你的具体模块修改这两个值
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 
-dev = BH1750FVI(i2c_2)
-
-pwm = PWM(Pin(25))
-
-# Set the PWM frequency.
-pwm.freq(1000)
+def show(show_text):
+    display.fill(0)
+    display.text(show_text, 0, 0)
+    display.show()
 
 
-def update_led():
-    brightness = int(dev.read())
-    l = int(min(max(0, brightness), 200) / 200 * 100)
-    pwm.duty_u16(int(2 ** 16 * (l / float(200))))
-    print(brightness)
+# while True:
+#     print("123")
+# t = utime.localtime()
+# formatted_time = "{:02d}:{:02d}:{:02d}".format(t[3], t[4], t[5])
+# show(formatted_time)
 
+# 创建一个 UART 对象
+uart = UART(0, 9600)  # UART 通信在 0 号设备上，波特率为 9600
+uart.init(9600, bits=8, parity=None, stop=1)
+
+show('oijoijioj')
+show('123')
 
 while True:
-    update_led()
-    time.sleep(1)
+    if uart.any():
+        print('kkk')
+        text = uart.read(20).decode().strip()
+        print('text:', text)
+        show(text)
