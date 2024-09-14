@@ -27,21 +27,6 @@ class BH1750FVI:
         return self.value
 
 
-dev = BH1750FVI(i2c_2)
-
-pwm = PWM(Pin(25))
-
-# Set the PWM frequency.
-pwm.freq(1000)
+light_sensor_device = BH1750FVI(i2c_2)
 
 
-def update_led():
-    brightness = int(dev.read())
-    l = int(min(max(0, brightness), 200) / 200 * 100)
-    pwm.duty_u16(int(2 ** 16 * (l / float(200))))
-    print(brightness)
-
-
-while True:
-    update_led()
-    time.sleep(1)

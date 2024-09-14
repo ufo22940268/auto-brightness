@@ -1,8 +1,8 @@
 #!/Users/chao.cheng/.pyenv/shims/python3
-import serial
+from talker import Talker
 
-ser = serial.Serial('/dev/tty.usbmodem21401', 9600, timeout=1)  # 打开串口
-ser.flushInput()
-data = ser.readline()
-ser.close()
-print(int(data))
+t = Talker()
+t.send("get_brightness()")
+b = t.receive()
+print(int(b))
+t.close()
