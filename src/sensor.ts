@@ -3,8 +3,8 @@ import path from "path";
 import { environment } from "@raycast/api";
 import * as fs from "fs";
 
-const binaryAsset = path.join(environment.assetsPath, "read_brightness.py");
-const binary = path.join(environment.supportPath, "read_brightness.py");
+const binaryAsset = path.join(environment.assetsPath, "cli.py");
+const binary = path.join(environment.supportPath, "cli.py");
 
 const talkerAsset = path.join(environment.assetsPath, "talker.py");
 const talker = path.join(environment.supportPath, "talker.py");
@@ -31,7 +31,7 @@ export function isNumeric(str: string) {
 
 export const readBrightness = async (): Promise<number> => {
     await ensureBinary();
-    const {stdout} = await execa("python3", [binary]);
+    const {stdout} = await execa("python3", [binary, 'get_brightness']);
     if (!isNumeric(stdout)) {
         throw new Error("error get brightness: " + stdout);
     }
