@@ -11,11 +11,18 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "sync-brightness",
+      "name": "syncBrightness",
       "title": "Sync brightness",
       "description": "adjust monitor brightness",
       "mode": "no-view",
       "interval": "10s"
+    },
+    {
+      "name": "syncVolume",
+      "title": "Sync Volume",
+      "description": "update external speaker volume to lcd",
+      "mode": "no-view",
+      "interval": "20s"
     },
     {
       "name": "brightnessDiameter",
