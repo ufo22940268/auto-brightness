@@ -18,13 +18,6 @@
       "interval": "10s"
     },
     {
-      "name": "syncVolume",
-      "title": "Sync Volume",
-      "description": "update external speaker volume to lcd",
-      "mode": "no-view",
-      "interval": "20s"
-    },
-    {
       "name": "brightnessDiameter",
       "title": "Birightness diameter",
       "description": "",
