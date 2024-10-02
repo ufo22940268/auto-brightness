@@ -1,11 +1,23 @@
-import time
+from machine import Pin, I2C
+import ssd1306
 
-from machine import Pin, I2C, PWM
+from audio import draw_volume
 
-i2c_2 = I2C(1, sda=Pin(14), scl=Pin(15), freq=400000)
+i2c = I2C(1, sda=Pin(2), scl=Pin(3))
+i2c_2 = I2C(0, sda=Pin(12), scl=Pin(13), freq=400000)
+
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+
+def show(vol):
+    draw_volume(display, vol)
+
+
+# show("Hello")
+
+# draw_volume(display, 30)
 
 # Simple driver for the BH1750FVI digital light sensor
-
 MEASUREMENT_TIME = 120
 
 
@@ -30,3 +42,6 @@ class BH1750FVI:
 light_sensor_device = BH1750FVI(i2c_2)
 
 
+def get_brightness():
+    b = int(light_sensor_device.read())
+    return b
