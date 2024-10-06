@@ -92,3 +92,8 @@ def draw_volume(display, vol):
         display.show()
     else:
         draw_volume_bar(display, vol / 100)
+
+
+def draw_blank(display):
+    display.fill(0)
+    display.show()

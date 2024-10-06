@@ -1,16 +1,24 @@
 from machine import Pin, I2C
 import ssd1306
 
-from audio import draw_volume
+from audio import draw_volume, draw_blank
 
 i2c = I2C(1, sda=Pin(2), scl=Pin(3))
 i2c_2 = I2C(0, sda=Pin(12), scl=Pin(13), freq=400000)
 
 display = ssd1306.SSD1306_I2C(128, 64, i2c)
+display_enabled = True
 
 
 def show(vol):
-    draw_volume(display, vol)
+    if display_enabled:
+        draw_volume(display, vol)
+
+
+def turn_off_display(turn_off):
+    global display_enabled
+    display_enabled = not turn_off
+    draw_blank(display)
 
 
 # Simple driver for the BH1750FVI digital light sensor
@@ -41,3 +49,11 @@ light_sensor_device = BH1750FVI(i2c_2)
 def get_brightness():
     b = int(light_sensor_device.read())
     return b
+
+# while True:
+#     current_hour = utime.localtime()[3]  # Get the current hour
+#     print(current_hour)
+#     if current_hour >= 21 or current_hour < 5:
+#         draw_blank(display)
+#     # utime.sleep(60)  # Sleep for 1 minute
+#     utime.sleep(1)  # Sleep for 1 minute
