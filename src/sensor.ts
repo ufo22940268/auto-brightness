@@ -4,6 +4,8 @@ import path from "path";
 const assetsPath = '/Users/chao.cheng/code/extensions/auto-brightness/assets'
 const binary = path.join(assetsPath, "cli.py");
 
+export let changeDisplayInOneDay: { date: Date ; off: boolean } = {date: new Date(0), off: false}
+
 export function isNumeric(str: string) {
     if (typeof str != "string") return false // we only process strings!
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
