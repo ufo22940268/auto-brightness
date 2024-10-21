@@ -5,7 +5,7 @@ class Talker:
     TERMINATOR = '\r'.encode('UTF8')
 
     def __init__(self, timeout=1):
-        self.serial = serial.Serial('/dev/cu.usbmodem1401', 9600, timeout=timeout)
+        self.serial = serial.Serial('/dev/cu.usbmodem21401', 9600, timeout=timeout)
 
     def send(self, text: str):
         """

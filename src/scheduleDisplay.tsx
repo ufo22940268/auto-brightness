@@ -1,11 +1,11 @@
-import { changeDisplayInOneDay, turnOffDisplay, turnOnDisplay } from "./sensor";
+import { turnOffDisplay, turnOnDisplay } from "./sensor";
+import { hasChange } from "./temporaryChangeDisplay";
 
 export default async () => {
   const currentHour = new Date().getHours();
 
-  let currentDate = new Date();
-  if (changeDisplayInOneDay.date && currentDate.toISOString().substring(0,10) === (changeDisplayInOneDay.date as Date).toISOString().substring(0,10)) {
-    return;
+  if (hasChange() != null) {
+    return true;
   }
 
   if (currentHour >= 21 || currentHour < 6) {
@@ -16,3 +16,4 @@ export default async () => {
     await turnOnDisplay();
   }
 }
+
