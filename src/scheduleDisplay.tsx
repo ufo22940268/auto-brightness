@@ -8,7 +8,7 @@ export default async () => {
   //   return true;
   // }
 
-  if (currentHour >= 21 || currentHour < 6) {
+  if (currentHour >= 20 || currentHour < 6) {
     console.log('turnOffDisplay');
     await turnOffDisplay();
   } else {
